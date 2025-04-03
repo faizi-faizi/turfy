@@ -11,6 +11,9 @@ const bookingSchema = new mongoose.Schema({
         ref:'Turf',
         required:'true'
     },
+    managerId:{
+        type:mongoose.Schema.Types.ObjectId,ref:'User'
+    },
     date:{
         type:Date,
         required:true

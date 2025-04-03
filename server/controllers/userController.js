@@ -14,6 +14,7 @@ const register = async(req,res) =>{
         const hashedPassword = await bcrypt.hash(password,salt)
 
         const newUser = new userModel({name,email,phone,password:hashedPassword})
+        
         const userDetails = await newUser.save()
         return res.status(201).json({message: "Account created", userDetails})
 
@@ -58,7 +59,7 @@ const login = async(req,res)=>{
 
 const profile = async(req,res)=>{
     try {
-        const userId = req.user;
+        const userId = req.user.id;
         const user = await userModel.findById(userId).select("-password")
         res.status(200).json(user)
     } catch (error) {

@@ -20,12 +20,12 @@ const turfSchema = new mongoose.Schema({
             required: true
         }
     },
-    Price: {
+    price: {
         type: Number,
         required: true
     },
     slots: {
-        type: String
+        type: [String]
     },
     managerId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,5 +40,5 @@ const turfSchema = new mongoose.Schema({
     }]
 },{timestamps: true})
 
-const Turf = new mongoose.model("turfs",userSchema)
-module.exports = Turf
+const turfModel = new mongoose.model("turfs",turfSchema)
+module.exports = turfModel
