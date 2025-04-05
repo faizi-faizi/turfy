@@ -22,6 +22,10 @@ const bookingSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    price: {
+        type:Number,
+        required:true
+    }, 
     status:{
         type:String,
         enum: ['pending','confirmed','cancelled'],
@@ -33,5 +37,5 @@ const bookingSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-const Booking = mongoose.model('bookings',bookingSchema)
-module.exports = Booking
+const bookingModel = mongoose.model('booking',bookingSchema)
+module.exports = bookingModel

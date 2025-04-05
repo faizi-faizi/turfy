@@ -1,20 +1,16 @@
-const { loginManger, getManagerData, manageBooking, createTurf, updateTurf, deleteTurf } = require('../controllers/managerController')
-const authMiddleware = require('../middlewares/authMiddleware')
-const upload = require('../middlewares/multer')
-const roleMiddleware = require('../middlewares/roleMiddleware')
+const { loginManger, getManagerData, createManager } = require('../controllers/managerController');
+const authMiddleware = require('../middlewares/authMiddleware');
+const roleMiddleware = require('../middlewares/roleMiddleware');
 
-const managerRoutes = require('express').Router()
+const managerRoutes = require('express').Router();
 
-managerRoutes.post('/login',loginManger)
-managerRoutes.get('/dashboard', authMiddleware,getManagerData)
-managerRoutes.get('/bookings/:bookingId', authMiddleware,roleMiddleware(['manger']),manageBooking)
+// Admin-only: create a manager
+managerRoutes.post('/signup', authMiddleware, roleMiddleware(['admin']), createManager);
 
-//turf management
-managerRoutes.post('/create-turf',authMiddleware, upload.array("images",3), createTurf)
-managerRoutes.patch('/update-turf/:turfId',authMiddleware, upload.array("images",3), updateTurf)
-managerRoutes.delete('/delete-turf/:turfId',authMiddleware, deleteTurf)
-deleteTurf
+// Public: manager login
+managerRoutes.post('/login', loginManger);
 
+// Protected: manager dashboard
+managerRoutes.get('/dashboard', authMiddleware, roleMiddleware(['manager']), getManagerData);
 
-
-module.exports = managerRoutes
+module.exports = managerRoutes;

@@ -7,7 +7,8 @@ userRoutes.post('/register', register)
 userRoutes.post('/login', login)
 userRoutes.get('/profile',authMiddleware,profile)
 userRoutes.patch("/update",authMiddleware,updateUser)
-userRoutes.delete("/delete-user/:userId",deleteUser)
+userRoutes.delete("/delete-user/:userId", authMiddleware, deleteUser)
 
+module.exports = userRoutes
 
 module.exports = userRoutes

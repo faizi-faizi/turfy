@@ -24,7 +24,7 @@ const turfSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    slots: {
+    slot: {
         type: [String]
     },
     managerId: {
@@ -40,5 +40,5 @@ const turfSchema = new mongoose.Schema({
     }]
 },{timestamps: true})
 
-const turfModel = new mongoose.model("turfs",turfSchema)
+const turfModel = new mongoose.model("turf",turfSchema)
 module.exports = turfModel
